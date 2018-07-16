@@ -8,6 +8,13 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Map.Entry;
+ 
+import java.util.Set;
 
 public class IotClientFactoryBean implements InitializingBean,FactoryBean<IMqttClient>{
 
@@ -16,27 +23,34 @@ public class IotClientFactoryBean implements InitializingBean,FactoryBean<IMqttC
     private String protocol = TCP_PROTOCOL;
     private boolean useSsl = false;
     private String host;
-	private int port = 1883;
+	private int port ;  //= 1883;
     private String clientId = buildClientId();
     private MqttClientPersistence mqttClientPersistence;
     private String username, password;
     private MqttConnectOptions mqttConnectOptions;
-    private Boolean cleanSession = null;
+    private Boolean cleanSession ;//= null;
 
+    
+   
     public IotClientFactoryBean() {
+     
+    	readProperties();
+    	
     }
     
     public IotClientFactoryBean(String host) {
         setup(host, this.username, this.password);
+        readProperties();
     }
 
     public IotClientFactoryBean(String host, String u, String p) {
         setup(host, u, p);
+        readProperties();
     }
 
     public IotClientFactoryBean(String host, int port, String u, String p) {
         setup(host, u, p);
-        this.setPort(port);
+        readProperties();
     }
 
     public void setup(String h, String u, String p) {
@@ -165,4 +179,25 @@ public class IotClientFactoryBean implements InitializingBean,FactoryBean<IMqttC
         }
         return connectOptions;
     }
+    
+    protected void readProperties(){
+        
+        Properties properties = new Properties();
+       // System.out.println(System.getProperty("user.dir"));
+        try {
+			properties.load( this.getClass().getClassLoader().getResourceAsStream( "IotClient.properties")) ;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+       // setHost(properties.getProperty("host"));
+        setUsername(properties.getProperty("userName"));
+        setPassword( properties.getProperty("pwd"));
+        setPort( Integer.valueOf(properties.getProperty("port")));
+        setCleanSession(true);
+        }
 }

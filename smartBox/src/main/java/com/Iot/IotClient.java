@@ -2,7 +2,10 @@ package com.Iot;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
@@ -126,7 +129,24 @@ public class IotClient {
 		 */
 		@Bean
 		public IotClientFactoryBean mqttClientFactoryBean() {
-			return new IotClientFactoryBean("114.55.72.41"); 
+			
+			
+		     Properties properties = new Properties();
+		       // System.out.println(System.getProperty("user.dir"));
+		        try {
+					properties.load( this.getClass().getClassLoader().getResourceAsStream( "IotClient.properties")) ;
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		        
+		      
+			// return new IotClientFactoryBean("114.55.72.41"); 
+			
+			return new IotClientFactoryBean(  properties.getProperty("host")); 
 		}
 		
 		@Bean
@@ -172,7 +192,7 @@ public class IotClient {
 		public IotClientMessageHandle sendCommandMsg(IMqttClient client) {
 	       // System.out.println("into sendCommandMsg");
 			//return new IotClientMessageHandle(client,"/Iot");
-			return new IotClientMessageHandle(client,"//World");
+			return new IotClientMessageHandle(client,"/World");
 		}
 		
 	}

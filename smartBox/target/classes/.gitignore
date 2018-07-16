@@ -1,4 +1,2 @@
-/META-INF/
-/applicationContext-mqtt.xml
 /com/
-/org/
+/META-INF/
