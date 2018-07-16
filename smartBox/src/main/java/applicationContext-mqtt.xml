@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:mqtt="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/integration
+						http://www.springframework.org/schema/integration/spring-integration.xsd
+ ">
+
+	<int:channel id="initMsgChannel" />
+	<int:outbound-channel-adapter ref="mqttInitMsg"
+		channel="initMsgChannel" />
+		
+	<int:channel id="ctrlMsgChannel" />	
+	<int:outbound-channel-adapter ref="sendCtrlMsg"
+		channel="ctrlMsgChannel" />
+		
+    <int:channel id="hostMsgChannel" />	
+	<int:outbound-channel-adapter ref="sendHostMsg"
+		channel="hostMsgChannel" />
+		
+ <int:channel id="commandMsgChannel" />	
+	<int:outbound-channel-adapter ref="sendCommandMsg"
+		channel="commandMsgChannel" />	
+
+</beans>
