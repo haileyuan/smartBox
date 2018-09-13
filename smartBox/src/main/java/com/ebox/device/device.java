@@ -1,6 +1,8 @@
 package com.ebox.device ;
 
  
+import java.util.UUID;
+
 import org.json.JSONObject;
 
 import com.ebox.device.fitting.*;
@@ -64,13 +66,14 @@ public  class device   {
 	private String regeditDate ;   //Regedit_date  注册日期 
 	private String softVer;        //Soft_ver      软件版本 
 	private String token;           //Token 		令牌
-	
+	private String sendTime;		//              发送命令时间[时间戳]
 	
 	public device(){
 		   super();
 	}
 	
 	public JSONObject Device_Json(){
+		setSendTime(String.valueOf(System.currentTimeMillis()/1000));
 		JSONObject json = new JSONObject(this);
 		return json;
 	}
@@ -185,6 +188,23 @@ public  class device   {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getSendTime() {
+		return sendTime;
+	}
+
+	public void setSendTime(String sendTime) {
+		this.sendTime = sendTime;
+	}
+	
+	public void allocDeviceId(){
+		   if ( this.deviceId==null||this.deviceId.equals("")  ){
+			   // found by ccid , if not exists deviceId then allock DeviceId
+			   
+			   String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase().substring(16);
+			   this.setDeviceId(uuid);
+		   }
 	}
 	
 	}

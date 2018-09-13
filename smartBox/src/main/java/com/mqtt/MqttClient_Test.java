@@ -7,8 +7,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;    
 
 import java.lang.String;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-  
+import java.lang.reflect.Method;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;    
@@ -20,13 +22,14 @@ import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.json.JSONObject;
 
+import com.Iot.Json;
 import com.ebox.device.device;
 import com.ebox.ebox.Ebox;  
     
 public class MqttClient_Test {    
     
     //public static final String HOST = "tcp://0.0.0.0:61613";   
-    public static final String HOST = "tcp://localhost:1883";   
+    public static final String HOST = "tcp://114.55.72.41:1883";   
    // public static final String TOPIC = "webServer";    
     public static final String TOPIC = "abcd";    
     private static final String clientid = "client123";
@@ -97,14 +100,14 @@ public class MqttClient_Test {
          //   message.setQos(0);
         //    client.publish("testddd",message);
             ebox = new Ebox();
-            ebox.getDevice_main().setDeviceId("uad0391129332");
-            
-            String scontent = ebox.OpenDoor(ebox.getDevice_main()).toString();
+          
+          
+            String scontent = ebox.OpenDoor(ebox.getDevice()).toString();
             MqttMessage message = new MqttMessage(scontent.getBytes());
             
             message.setQos(1);
             message.setRetained(true);
-            client.publish(ebox.getDevice_main().getDeviceId(), message) ;
+            client.publish(ebox.getDevice().getDeviceId(), message) ;
             
           //  message.setPayload("hgel333".getBytes());
             client.publish("abcd",message);
@@ -128,14 +131,19 @@ public class MqttClient_Test {
 				try {
                 String a = new String(message.getPayload(),"UTF8");
 				System.out.println(a);
+			
 				
 				JSONObject obj = new JSONObject(a);
+				device dev = Json.fromJson(a,device.class ); 
 				
-				Field[] f = device.class.getDeclaredFields();
-				for(Field fie : f){
-		            System.out.println("Receive Field"+fie.getName());
-		            System.out.println(fie.getName()+":" + obj.getString(fie.getName()));
-		        }
+				dev.allocDeviceId();
+				 
+			   
+				System.out.println(dev.getDeviceId());
+		            
+	 
+		         
+		        	
 				
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -24,9 +24,9 @@ public class fittingClass {
 		Fitting_door_lock 	= new fittingLock("DOORLOCK");
 		Fitting_batt_lock 	= new fittingLock("BATTLOCK");
 		Fitting_box_lock 	= new fittingLock("BOXLOCK");
-		Fitting_Inter_light = new fittingLight("INLIGHT");
-		Fitting_Out_light 	= new fittingLight("OUTLIGHT");
-		Fitting_batt         =new fittingBatt("BATT") ;
+		Fitting_Inter_light = new fittingLight("InLight");
+		Fitting_Out_light 	= new fittingLight("OutLight");
+		Fitting_batt         =new fittingBatt("BATT01") ;
 		Fitting_InkScree    = new fittingInkScreen();
 	}
 

@@ -50,8 +50,8 @@ public class IotClient {
 	private static AnnotationConfigApplicationContext context4 = new AnnotationConfigApplicationContext(MqttConfiguration.class);
 
 	
-	private static final String TOPIC_CTRL_MSG = "/ctrlMsg/";  //后面跟 hd_ver版本号
-	private static final String TOPIC_HOST_MSG = "/hostMsg/";  //后面跟应用软件版本号
+	private static final String TOPIC_CTRL_MSG = "/ctrlMsg/";   
+	private static final String TOPIC_HOST_MSG = "/hostMsg/";   
 
 	/**
 	 * 发送物流箱初始信息通道
@@ -158,7 +158,7 @@ public class IotClient {
 		 * @return
 		 */
 		public IotClientMessageHandle mqttInitMsg(IMqttClient client) {
-			return new IotClientMessageHandle(client, "/Iot/event/*");
+			return new IotClientMessageHandle(client, "/Iot/regedit");
 		}
 		@Bean
 		
@@ -192,7 +192,7 @@ public class IotClient {
 		public IotClientMessageHandle sendCommandMsg(IMqttClient client) {
 	       // System.out.println("into sendCommandMsg");
 			//return new IotClientMessageHandle(client,"/Iot");
-			return new IotClientMessageHandle(client,"/World");
+			return new IotClientMessageHandle(client,"/iot/shsx/");
 		}
 		
 	}

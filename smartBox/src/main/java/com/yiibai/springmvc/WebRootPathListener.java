@@ -25,7 +25,7 @@ public class WebRootPathListener extends ContextLoaderListener {
         try {
 			System.out.println("IotClientœﬂ≥Ã∆Ù∂Ø......");
 			String time = new Date().toString();
-			IotClient.initMessage("aaa");
+			IotClient.initMessage("regedit");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

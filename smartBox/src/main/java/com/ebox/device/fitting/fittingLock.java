@@ -47,12 +47,12 @@ public class fittingLock {
 
 	}
 
-	public String getLookName() {
+	public String getLockName() {
 		return lockName;
 	}
 
 	public void setLockName(String lockName) {
-		lockName = lockName;
+		this.lockName = lockName;
 	}
 
 	public String getLockCommand() {
@@ -70,7 +70,7 @@ public class fittingLock {
 	public void setLockCommand(String lockCommand) {
 
 		if (lockCommand.equals("OPEN") || lockCommand.equals("CLOSE")){
-		    lockCommand = lockCommand;
+		    this.lockCommand = lockCommand;
 		}
 		else {
 			throw new  deviceException("锁命令不正确。");
@@ -108,10 +108,11 @@ public class fittingLock {
 	 * 设置关锁
 	 *  
 	 */
-	public String closeLock() {
+	public JSONObject closeLock() {
 		this.setLockCommand("CLOSE");
 		JSONObject json = new JSONObject(this);
-		return json.toString();
+		//return json.toString();
+		return json;
 	}
 	
 	

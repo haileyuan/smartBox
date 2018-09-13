@@ -1,7 +1,11 @@
 package com.Iot;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
+
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -10,10 +14,12 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttSecurityException;
-
+import org.json.*;
 import org.springframework.integration.handler.AbstractMessageHandler;
 import org.springframework.messaging.Message;
 import org.springframework.util.Assert;
+
+import com.ebox.device.device;
 
 //	import youway.service.mqtt.msg.IMsgHandle;
 //	import youway.service.mqtt.msg.impl.AaaMsgHandle;
@@ -117,7 +123,17 @@ public class IotClientMessageHandle extends AbstractMessageHandler implements
 			// IMsgHandle msgHandle = getHandle(topic);
 			// msgHandle.handle(topic, content);
 			 System.out.println(content);
-			logger.debug("..................消息处理完成................");
+			 logger.debug("..................消息处理完成................");
+			 switch(topic){
+				 case "/Iot/regedit" :				 
+					 
+					 device dev = Json.fromJson(content,device.class );
+					 dev.allocDeviceId();// 没有deviceId 则系统分配一个 
+					 
+					 
+					 System.out.println("Parse json is "+ dev.Device_Json().toString());
+			 }
+			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -138,4 +154,17 @@ public class IotClientMessageHandle extends AbstractMessageHandler implements
 	 *         SpringContextUtils.getBean("BbbMsgHandle", //
 	 *         BbbMsgHandle.class); break; return msgHandle; }
 	 */
+	
+	public IMsgHandle getHandle(String topic){
+		IMsgHandle msgHandle =null;
+		switch(topic) {
+		case "/Iot/regedit" :
+			
+		
+		}
+		
+		return msgHandle;
+	}
+	
+	
 }

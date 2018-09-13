@@ -35,12 +35,12 @@ import org.json.JSONObject;
  *  <td>userName </td><td> String </td><td> 10	</td><td>  	用户名         </td>
  *  </tr>
 *	<tr>
- *  <td>passWord   </td><td> String </td><td> 10	</td><td>	用户名  </td>
+ *  <td>passWord   </td><td> String </td><td> 10	</td><td>密码  </td>
  * </tr>
 *   </table>
  */
 public class fittingLink {
-    private static final  String  linkName ="SHSX";
+    private static  String  linkName ="SHSX";
 	private String  serverIP;
 	private Integer port;
 	private String  userName;
@@ -74,8 +74,8 @@ public class fittingLink {
 	private void setLinkName(String linkName) {
 		this.linkName = "SHSX";
 	}
+ 
 */
-
    /**
     * 获取智能物联箱连接的broker的IP地址
     *  

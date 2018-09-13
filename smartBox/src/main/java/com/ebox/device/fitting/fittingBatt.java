@@ -39,16 +39,16 @@ import com.ebox.exception.deviceException;
  
 */
 
-public class  fittingBatt extends fittingSensor{
+public class  fittingBatt  {
  
 	
 	private  String  battName;
 	private  Integer battVolumn;
 	private  Integer battAlterVol;
 	
-	public fittingBatt(String string) {
+	public fittingBatt(String battName) {
 		// TODO Auto-generated constructor stub
-		this.battName = string;
+		this.battName = battName;
 	}
 
 	/**

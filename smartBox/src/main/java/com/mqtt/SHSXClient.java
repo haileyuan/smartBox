@@ -20,5 +20,5 @@ public class SHSXClient{
 public static void main(String[] args) throws MqttException {
 	 SHSXClient sh = new SHSXClient();
 	 sh.start();
-}
+ }
 }

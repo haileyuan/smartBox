@@ -45,24 +45,35 @@ import com.ebox.exception.deviceException;
 public class fittingSensor {
 	private String  sensorName;
 	private Integer reportInterval;
-	private String  alterValue;
+	private Integer  alterValue;
 	private Integer reportTime;
 	private Integer alterAvilable;
 
+	
+	public fittingSensor(String sensorName){
+		setSensorName(sensorName);
+		
+	}
+	
 	/**
 	 * 获取传感器名称
 	 */
 	public String getSensorName() {
 
-		return sensorName;
+		return this.sensorName;
 	}
 
 	/**
 	 * 设置传感器名称
+	 * 
+	 * [TE] 温度传感器
+	 * [HR] 湿度传感器
 	 */
 	public void setSensorName(String sensor_name) {
-
-		sensorName = sensor_name;
+        if (sensor_name.equals("TH") || sensor_name.equals("HR"))
+		this.sensorName = sensor_name;
+        else
+        	throw new deviceException("设置传感器名称错误！"+sensor_name);
 	}
 
 	/**
@@ -70,7 +81,7 @@ public class fittingSensor {
 	 */
 	public Integer getReportInterval() {
 
-		return reportInterval;
+		return this.reportInterval;
 	}
 
 	/**
@@ -79,7 +90,7 @@ public class fittingSensor {
 	public void setReportInterval(Integer reportInterval) {
 
 		if (reportInterval > 0 && reportInterval < 60000) {
-			reportInterval = reportInterval;
+			this.reportInterval = reportInterval;
 		} else
 			throw new deviceException("设置传感器报告间隔时间 在 0 到 60000范围内");
 	}
@@ -87,17 +98,17 @@ public class fittingSensor {
 	/**
 	 * 获取传感器警报值
 	 */
-	public String getAlterValue() {
+	public Integer getAlterValue() {
 
-		return alterValue;
+		return this.alterValue;
 	}
 
 	/**
 	 * 设置传感器警报值
 	 */
-	public void setAlterValue(String alterValue) {
+	public void setAlterValue(Integer alterValue) {
 
-		alterValue = alterValue;
+		this.alterValue = alterValue;
 	}
 
 	/**
@@ -113,7 +124,7 @@ public class fittingSensor {
 	 */
 	public void setReportTime(Integer reportTime) {
 
-		reportTime = reportTime;
+		this.reportTime = reportTime;
 	}
 
 	/**
@@ -121,7 +132,7 @@ public class fittingSensor {
 	 */
 	public Integer getAlterAvilable() {
 
-		return alterAvilable;
+		return this.alterAvilable;
 	}
 
 	/**
@@ -135,7 +146,7 @@ public class fittingSensor {
 
 		if (alterAvilable == 0 || alterAvilable == 1) {
 
-			alterAvilable = alterAvilable;
+			this.alterAvilable = alterAvilable;
 		} else
 			throw new deviceException("设置传感器是否上报警告值错误！");
 	}

@@ -71,6 +71,7 @@ public class Ebox implements IEbox_command {
 	 */
 	public void setDevice_main(device device ) {
 		this.device  = device ;
+		this.Fitting_class = new fittingClass();
 	}
 
 	/**
@@ -95,7 +96,7 @@ public class Ebox implements IEbox_command {
 		Fitting_lock_doorlock.openLock();
 		JSONObject dev_json = device.Device_Json();
 		JSONObject fitting_json = Fitting_lock_doorlock.Fitting_Json();
-		dev_json.put("Fitting_lock", fitting_json);
+		dev_json.put("fittingLock", fitting_json);
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -109,8 +110,9 @@ public class Ebox implements IEbox_command {
 		fittingLock Fitting_lock_doorlock = new fittingLock("DOORLOCK");
 		Fitting_lock_doorlock.closeLock();
 		JSONObject dev_json = device.Device_Json();
-		JSONObject fitting_json = Fitting_lock_doorlock.Fitting_Json();
-		dev_json.put("Fitting_lock", fitting_json);
+		//JSONObject fitting_json = Fitting_lock_doorlock.Fitting_Json();
+		JSONObject fitting_json = Fitting_lock_doorlock.closeLock();
+		dev_json.put("fittingLock", fitting_json);
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -119,7 +121,7 @@ public class Ebox implements IEbox_command {
 
 	/**
 	 * 传感器设置 ,将 传感器的所有有设定都传送
-	 * 
+	 *  
 	 * @param device
 	 * @param sensor
 	 * @return JSONObject
@@ -129,7 +131,27 @@ public class Ebox implements IEbox_command {
 
 		JSONObject dev_json = device.Device_Json();
 		JSONObject fitting_json = sensor.Fitting_Json();
-		dev_json.put("Fitting_sensor", fitting_json);
+		dev_json.put("fittingSensor", fitting_json);
+
+		System.out.println(dev_json);
+		return dev_json;
+
+	}
+	
+	/**
+	 * 传感器查询 ,获取 传感器的值
+	 * A)如果只有传感器名称，没有要设定的参数值，则视为查询
+	 * @param device
+	 * @param sensor
+	 * @return JSONObject
+	 * @throws JSONException
+	 */
+	public JSONObject SensorQuery(device device, String sensorName) throws JSONException {
+
+		JSONObject dev_json = device.Device_Json();
+		fittingSensor  fittingSensor  = new fittingSensor(sensorName);
+		JSONObject fitting_json = fittingSensor.Fitting_Json();
+		dev_json.put("fittingSensor", fitting_json);
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -149,7 +171,7 @@ public class Ebox implements IEbox_command {
 		inLight.setLightCommand("ON");
 		JSONObject fitting_json = inLight.Fitting_Json();
 
-		dev_json.put("Fitting_Light", fitting_json);
+		dev_json.put("fittingLight", fitting_json);
 		System.out.println(dev_json);
 		return dev_json;
 	}
@@ -167,7 +189,7 @@ public class Ebox implements IEbox_command {
 		inLight.setLightCommand("OFF");
 
 		JSONObject fitting_json = inLight.Fitting_Json();
-		dev_json.put("Fitting_Light", fitting_json);
+		dev_json.put("fittingLight", fitting_json);
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -186,7 +208,7 @@ public class Ebox implements IEbox_command {
 		outLight.setLightCommand("ON");
 		JSONObject fitting_json = outLight.Fitting_Json();
 
-		dev_json.put("Fitting_Light", fitting_json);
+		dev_json.put("fittingLight", fitting_json);
 		System.out.println(dev_json);
 		return dev_json;
 	}
@@ -204,7 +226,7 @@ public class Ebox implements IEbox_command {
 		outLight.setLightCommand("OFF");
 
 		JSONObject fitting_json = outLight.Fitting_Json();
-		dev_json.put("Fitting_Light", fitting_json);
+		dev_json.put("fittingLight", fitting_json);
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -218,7 +240,7 @@ public class Ebox implements IEbox_command {
 		Fitting_lock_doorlock.openLock();
 		JSONObject dev_json = device.Device_Json();
 		JSONObject fitting_json = Fitting_lock_doorlock.Fitting_Json();
-		dev_json.put("Fitting_lock", fitting_json);
+		dev_json.put("fittingLock", fitting_json);
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -235,7 +257,7 @@ public class Ebox implements IEbox_command {
 		Fitting_lock_doorlock.closeLock();
 		JSONObject dev_json = device.Device_Json();
 		JSONObject fitting_json = Fitting_lock_doorlock.Fitting_Json();
-		dev_json.put("Fitting_lock", fitting_json);
+		dev_json.put("fittingLock", fitting_json);
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -252,7 +274,7 @@ public class Ebox implements IEbox_command {
 		Fitting_lock_doorlock.openLock();
 		JSONObject dev_json = device.Device_Json();
 		JSONObject fitting_json = Fitting_lock_doorlock.Fitting_Json();
-		dev_json.put("Fitting_lock", fitting_json);
+		dev_json.put("fittingLock", fitting_json);
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -269,7 +291,7 @@ public class Ebox implements IEbox_command {
 		Fitting_lock_doorlock.closeLock();
 		JSONObject dev_json = device.Device_Json();
 		JSONObject fitting_json = Fitting_lock_doorlock.Fitting_Json();
-		dev_json.put("Fitting_lock", fitting_json);
+		dev_json.put("fittingLock", fitting_json);
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -285,7 +307,7 @@ public class Ebox implements IEbox_command {
 	public JSONObject setLink(device device, fittingLink fitting_link) throws JSONException {
 
 		JSONObject dev_json = device.Device_Json();
-		dev_json.put("Fitting_link", fitting_link.Fitting_Json());
+		dev_json.put("fittingLink", fitting_link.Fitting_Json());
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -307,7 +329,7 @@ public class Ebox implements IEbox_command {
 
 		JSONObject dev_json = device.Device_Json();
 
-		dev_json.put("Fitting_InkSreen", fitting_link.Fitting_Json());
+		dev_json.put("fittingInkScreen", fitting_link.Fitting_Json());
 
 		System.out.println(dev_json);
 		return dev_json;
@@ -330,7 +352,7 @@ public class Ebox implements IEbox_command {
 
 		JSONObject dev_json = device.Device_Json();
 
-		dev_json.put("Fitting_InkSreen", fitting_link.Fitting_Json());
+		dev_json.put("fittingInkScreen", fitting_link.Fitting_Json());
 
 		System.out.println(dev_json);
 		return dev_json;

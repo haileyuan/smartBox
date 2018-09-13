@@ -34,7 +34,7 @@ public class IotClientFactoryBean implements InitializingBean,FactoryBean<IMqttC
    
     public IotClientFactoryBean() {
      
-    	readProperties();
+    	readProperties();//¶ÁÈ¡ÅäÖÃÎÄ¼þ
     	
     }
     
